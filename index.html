@@ -3,28 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wedding Invitation — Muzammil & Mariyam</title>
+  <title>Nikkah Invitation — Muzammil & Maryam</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html, body {
-      height: 100%; width: 100%;
-      overflow: hidden;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Cormorant Garamond', Georgia, serif;
       background: #FAF3E8;
       color: #2C1C08;
-      display: flex;
-      align-items: stretch;
-      justify-content: stretch;
+      min-height: 100%;
     }
 
-    /* matte noise */
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 0;
@@ -32,24 +26,26 @@
       pointer-events: none;
     }
 
-    /* ── full-screen card ── */
+    /* ── card ── */
     .card {
       position: relative; z-index: 1;
-      flex: 1;
+      max-width: 720px;
+      margin: 0 auto;
       background: #F3E8D4;
-      padding: clamp(28px, 5vh, 56px) clamp(32px, 6vw, 80px);
+      padding: clamp(60px, 10vw, 100px) clamp(32px, 7vw, 80px) clamp(48px, 8vw, 80px);
       display: flex;
       flex-direction: column;
-      justify-content: space-evenly;
       align-items: center;
       gap: 0;
+      min-height: 100vh;
+      box-shadow: 0 0 80px rgba(180,120,10,0.08);
     }
 
     /* corner ornaments */
     .corner {
       position: absolute;
       width: clamp(60px, 8vw, 96px);
-      opacity: 0.45;
+      opacity: 0.4;
     }
     .corner.tl { top: 0; left: 0; }
     .corner.tr { top: 0; right: 0; transform: scaleX(-1); }
@@ -59,97 +55,270 @@
     /* ── divider ── */
     .divider {
       display: flex; align-items: center; gap: 12px;
-      width: 100%; max-width: 560px;
-      margin: clamp(8px, 1.4vh, 16px) 0;
+      width: 100%; max-width: 480px;
+      margin: clamp(20px, 3.5vh, 36px) 0;
     }
     .divider span {
       flex: 1; height: 1px;
       background: linear-gradient(to right, transparent, #C9950E 50%, transparent);
-      opacity: 0.3;
+      opacity: 0.35;
     }
-    .divider i { display: none; }
+    .divider-gem {
+      width: 7px; height: 7px;
+      border: 1px solid #C9950E;
+      transform: rotate(45deg);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
 
-    /* ── top tag ── */
-    .top-tag {
+    /* ── bismillah ── */
+    .bismillah {
+      font-family: 'Amiri', serif;
+      font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+      color: #8B6914;
       text-align: center;
-      font-family: 'Cinzel', serif;
-      font-size: clamp(0.52rem, 1vw, 0.68rem);
-      letter-spacing: 0.42em;
+      line-height: 1.6;
+      direction: rtl;
+      margin-bottom: 8px;
+    }
+    .bismillah-trans {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.72rem, 1.4vw, 0.9rem);
       color: #A07840;
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── tag ── */
+    .top-tag {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.52rem, 1vw, 0.7rem);
+      letter-spacing: 0.5em;
+      color: #A07840;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* ── quran verse ── */
+    .verse-block {
+      text-align: center;
+      max-width: 520px;
+    }
+    .verse-arabic {
+      font-family: 'Amiri', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: #7A5C0A;
+      direction: rtl;
+      line-height: 2;
+      margin-bottom: 10px;
+    }
+    .verse-english {
+      font-style: italic;
+      font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+      color: #6B4E15;
+      line-height: 1.75;
+      margin-bottom: 6px;
+    }
+    .verse-ref {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.55rem, 1vw, 0.68rem);
+      letter-spacing: 0.3em;
+      color: #B8860B;
       text-transform: uppercase;
     }
 
-    /* ── names row ── */
+    /* ── opening message ── */
+    .opening {
+      text-align: center;
+      max-width: 500px;
+    }
+    .opening p {
+      font-style: italic;
+      font-size: clamp(0.88rem, 1.6vw, 1.05rem);
+      color: #7A5C0A;
+      line-height: 1.9;
+    }
+
+    /* ── names section ── */
     .names-row {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 16px;
+      align-items: start;
+      gap: clamp(12px, 2.5vw, 28px);
       text-align: center;
       width: 100%;
-      max-width: 700px;
     }
 
-    .person { display: flex; flex-direction: column; gap: 5px; }
+    .person { display: flex; flex-direction: column; gap: 8px; }
 
     .person-name {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
-      font-size: clamp(1.9rem, 5vw, 3.4rem);
+      font-style: italic;
+      font-size: clamp(1.9rem, 5vw, 3.2rem);
       line-height: 1;
-      color: #2C1C08;
+      color: #B8860B;
     }
-    .person-name em { font-style: italic; color: #B8860B; }
 
-    .person-so {
-      font-size: clamp(0.72rem, 1.2vw, 0.9rem);
+    .person-full {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.52rem, 0.9vw, 0.65rem);
+      letter-spacing: 0.2em;
       color: #9E7840;
-      line-height: 1.5;
+      text-transform: uppercase;
     }
-    .person-so strong { color: #5A3E0C; font-weight: 600; }
+
+    .person-lineage {
+      font-size: clamp(0.78rem, 1.3vw, 0.95rem);
+      color: #9E7840;
+      line-height: 1.65;
+    }
+    .person-lineage strong { color: #5A3E0C; font-weight: 600; }
+    .person-lineage .relation {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.48rem, 0.8vw, 0.6rem);
+      letter-spacing: 0.2em;
+      color: #B8860B;
+      text-transform: uppercase;
+      display: block;
+      margin-top: 6px;
+      margin-bottom: 2px;
+    }
 
     .amp-col {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      font-size: clamp(2rem, 5vw, 3.4rem);
       color: #C9950E;
       line-height: 1;
+      padding-top: clamp(12px, 2vw, 20px);
     }
 
-    /* ── date row ── */
-    .info-row {
-      display: flex;
-      justify-content: center;
+    /* ── event sections ── */
+    .events-grid {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 0;
       width: 100%;
     }
 
-    .info-block { text-align: center; }
+    .event-sep {
+      background: linear-gradient(to bottom, transparent, #C9950E 30%, #C9950E 70%, transparent);
+      opacity: 0.25;
+    }
 
-    .info-label {
+    .event-block {
+      padding: clamp(16px, 3vw, 28px) clamp(12px, 2.5vw, 24px);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .event-title {
       font-family: 'Cinzel', serif;
-      font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+      font-size: clamp(0.55rem, 1vw, 0.72rem);
       letter-spacing: 0.3em;
       color: #B8860B;
       text-transform: uppercase;
-      display: block;
-      margin-bottom: 10px;
+      line-height: 1.5;
     }
 
-    .info-date-num {
+    .event-date-num {
       font-family: 'Cinzel', serif;
-      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
       font-weight: 600;
       color: #B8860B;
       line-height: 1;
     }
 
-    .info-date-txt {
+    .event-date-txt {
       font-family: 'Cinzel', serif;
-      font-size: clamp(0.75rem, 1.4vw, 1rem);
-      letter-spacing: 0.14em;
+      font-size: clamp(0.62rem, 1.1vw, 0.8rem);
+      letter-spacing: 0.12em;
       color: #9E7840;
-      margin-top: 8px;
     }
+
+    .event-time {
+      font-style: italic;
+      font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+      color: #7A5C0A;
+    }
+
+    .event-venue {
+      font-size: clamp(0.82rem, 1.4vw, 1rem);
+      color: #5A3E0C;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .event-note {
+      font-style: italic;
+      font-size: clamp(0.72rem, 1.2vw, 0.88rem);
+      color: #A07840;
+      line-height: 1.5;
+    }
+
+    /* ── countdown ── */
+    .countdown-label {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.52rem, 0.9vw, 0.65rem);
+      letter-spacing: 0.35em;
+      color: #A07840;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .countdown {
+      display: flex; align-items: flex-start;
+      justify-content: center; gap: 10px;
+    }
+
+    .cd-unit { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+
+    .cd-box {
+      background: #EDE0C8;
+      border: 1px solid #D9C49A;
+      border-top-color: rgba(185,120,10,0.35);
+      width: clamp(72px, 12vw, 96px);
+      height: clamp(66px, 11vw, 88px);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .cd-box::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, transparent, #B8860B, transparent);
+    }
+
+    .cd-num {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 600;
+      color: #B8860B;
+      line-height: 1;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .cd-lbl {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.44rem, 0.8vw, 0.58rem);
+      letter-spacing: 0.2em;
+      color: #A07840;
+      text-transform: uppercase;
+    }
+
+    .cd-sep {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: #C9950E;
+      margin-top: clamp(10px, 1.8vw, 14px);
+      opacity: 0.5;
+      animation: blink 1.5s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:.5} 50%{opacity:.12} }
 
     /* google maps link */
     .map-link {
@@ -163,7 +332,7 @@
       color: #B8860B;
       text-decoration: none;
       border: 1px solid #D9C49A;
-      padding: 9px 18px;
+      padding: 10px 20px;
       transition: background 0.2s, border-color 0.2s, color 0.2s;
     }
     .map-link:hover {
@@ -177,168 +346,56 @@
       flex-shrink: 0;
     }
 
-    /* ── countdown ── */
-    .countdown {
-      display: flex; align-items: flex-start;
-      justify-content: center; gap: 10px;
-    }
-
-    .cd-unit { display: flex; flex-direction: column; align-items: center; gap: 5px; }
-
-    .cd-box {
-      background: #EDE0C8;
-      border: 1px solid #D9C49A;
-      border-top-color: rgba(185,120,10,0.35);
-      width: clamp(72px, 12vw, 100px);
-      height: clamp(66px, 11vw, 90px);
-      display: flex; align-items: center; justify-content: center;
-      position: relative;
-    }
-    .cd-box::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(to right, transparent, #B8860B, transparent);
-    }
-
-    .cd-num {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
-      font-weight: 600;
-      color: #B8860B;
-      line-height: 1;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-
-    .cd-lbl {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(0.45rem, 0.85vw, 0.6rem);
-      letter-spacing: 0.2em;
-      color: #A07840;
-      text-transform: uppercase;
-    }
-
-    .cd-sep {
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      color: #C9950E;
-      margin-top: clamp(10px, 1.8vw, 16px);
-      opacity: 0.5;
-      animation: blink 1.5s ease-in-out infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:.5} 50%{opacity:.12} }
-
-    /* ── welcome ── */
-    .welcome {
+    /* ── closing ── */
+    .closing {
       text-align: center;
-      max-width: 520px;
+      max-width: 440px;
     }
-    .welcome p {
+    .closing p {
       font-style: italic;
-      font-size: clamp(0.88rem, 1.5vw, 1.08rem);
+      font-size: clamp(0.88rem, 1.6vw, 1.08rem);
       color: #7A5C0A;
-      line-height: 1.75;
+      line-height: 1.85;
+    }
+    .closing-love {
+      margin-top: 14px;
+      font-size: clamp(0.92rem, 1.6vw, 1.1rem) !important;
+      color: #B8860B !important;
     }
 
     /* ── mobile ── */
-    @media (max-width: 480px) {
-      .card {
-        padding: 24px 20px;
-        justify-content: space-around;
-      }
+    @media (max-width: 560px) {
+      .card { padding: 56px 22px 48px; }
 
       .names-row {
         grid-template-columns: 1fr;
-        gap: 6px;
-        max-width: 100%;
-      }
-
-      .amp-col {
-        font-size: 1.6rem;
-        line-height: 1;
-      }
-
-      .person-name {
-        font-size: 2rem;
-      }
-
-      .person-so {
-        font-size: 0.78rem;
-      }
-
-      .cd-box {
-        width: 58px;
-        height: 54px;
-      }
-
-      .cd-num {
-        font-size: 1.5rem;
-      }
-
-      .cd-sep {
-        font-size: 1.2rem;
-        margin-top: 12px;
-      }
-
-      .cd-lbl {
-        font-size: 0.44rem;
-      }
-
-      .countdown {
-        gap: 6px;
-      }
-
-      .info-date-num {
-        font-size: 2.2rem;
-      }
-
-      .info-date-txt {
-        font-size: 0.72rem;
-      }
-
-      .info-label {
-        font-size: 0.62rem;
-      }
-
-      .map-link {
-        font-size: 0.55rem;
-        padding: 8px 14px;
-      }
-
-      .welcome p {
-        font-size: 0.82rem;
-      }
-
-      .divider {
-        margin: 6px 0;
-      }
-
-      .corner {
-        width: 50px;
-      }
-    }
-
-    /* iPhone SE 1st gen (320px) */
-    @media (max-width: 360px) {
-      .cd-box {
-        width: 50px;
-        height: 48px;
-      }
-
-      .cd-num {
-        font-size: 1.3rem;
-      }
-
-      .countdown {
         gap: 4px;
       }
+      .amp-col { font-size: 1.8rem; padding-top: 0; }
+      .person-name { font-size: 2.1rem; }
 
-      .cd-sep {
-        font-size: 1rem;
-        margin-top: 10px;
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+      .event-sep { display: none; }
+      .event-block:first-child {
+        border-bottom: 1px solid rgba(201,149,14,0.18);
+        padding-bottom: 24px;
+        margin-bottom: 4px;
       }
 
-      .person-name {
-        font-size: 1.7rem;
-      }
+      .cd-box { width: 58px; height: 54px; }
+      .cd-num { font-size: 1.5rem; }
+      .cd-sep { font-size: 1.2rem; margin-top: 12px; }
+      .countdown { gap: 6px; }
+      .corner { width: 50px; }
+    }
+
+    @media (max-width: 360px) {
+      .cd-box { width: 50px; height: 48px; }
+      .cd-num { font-size: 1.3rem; }
+      .countdown { gap: 4px; }
+      .person-name { font-size: 1.75rem; }
     }
   </style>
 </head>
@@ -372,37 +429,89 @@
     <path d="M18 42Q30 16 42 2" stroke="#D9C49A" stroke-width="0.7" stroke-dasharray="3 3"/>
   </svg>
 
-  <!-- top tag -->
-  <div class="top-tag">Wedding Invitation</div>
+  <!-- bismillah -->
+  <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+  <div class="bismillah-trans">In the Name of Allah, The Most Gracious, The Most Merciful</div>
+
+  <div class="divider" style="margin: clamp(16px,2.5vh,24px) 0;">
+    <span></span><div class="divider-gem"></div><span></span>
+  </div>
+
+  <!-- quranic verse -->
+  <div class="verse-block">
+    <div class="verse-arabic">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</div>
+    <div class="verse-english">"And among His signs is that He created for you spouses<br>so that you may find peace in one another."</div>
+    <div class="verse-ref">— Qur'an 30:21</div>
+  </div>
+
+  <div class="divider"><span></span><div class="divider-gem"></div><span></span></div>
+
+  <!-- tag -->
+  <div class="top-tag">Nikkah Invitation</div>
+
+  <div style="margin: clamp(12px,2vh,20px) 0;"></div>
+
+  <!-- opening message -->
+  <div class="opening">
+    <p>With the mercy and blessings of Allah سبحانه وتعالى,<br>together with the love and prayers of our families,<br>we joyfully invite you to the Nikkah of</p>
+  </div>
+
+  <div style="margin: clamp(20px,3.5vh,36px) 0;"></div>
 
   <!-- names -->
   <div class="names-row">
     <div class="person">
-      <div class="person-name"><em>Muzammil</em></div>
-      <div class="person-so">S/O <strong>Musthafa</strong></div>
+      <div class="person-name">Muzammil</div>
+      <div class="person-full">Muzammil Musthafa</div>
+      <div class="person-lineage">
+        <span class="relation">Son of</span>
+        <strong>Musthafa</strong> &amp; <strong>Umaiba</strong>
+      </div>
     </div>
+
     <div class="amp-col">&amp;</div>
+
     <div class="person">
-      <div class="person-name"><em>Mariyam</em></div>
-      <div class="person-so">D/O <strong>Ibrahim</strong></div>
+      <div class="person-name">Maryam<br>Ramsheena</div>
+      <div class="person-full">Maryam Ramsheena Hussain</div>
+      <div class="person-lineage">
+        <span class="relation">Daughter of</span>
+        <strong>Zakir Hussain</strong> &amp; <strong>Jameela Hussain</strong>
+        <span class="relation" style="margin-top:8px;">Granddaughter of</span>
+        <strong>Abdul Rehman</strong> &amp; <strong>Mariyamma</strong>
+        <br>
+        <strong>Eramu</strong> &amp; <strong>Zainaba</strong>
+      </div>
     </div>
   </div>
 
-  <div class="divider"><span></span><i></i><span></span></div>
+  <div class="divider"><span></span><div class="divider-gem"></div><span></span></div>
 
-  <!-- date centered -->
-  <div class="info-row">
-    <div class="info-block">
-      <span class="info-label">Date &amp; Time</span>
-      <div class="info-date-num">6</div>
-      <div class="info-date-txt">June 2026 &nbsp;·&nbsp; Sunday</div>
-      <div class="info-date-txt" style="margin-top:5px; color:#B8860B;">04:00 PM &nbsp;·&nbsp; 7:00 PM</div>
+  <!-- events -->
+  <div class="events-grid">
+    <div class="event-block">
+      <div class="event-title">Nikkah &amp;<br>Marriage Ceremony</div>
+      <div class="event-date-num">6</div>
+      <div class="event-date-txt">June 2026 &nbsp;·&nbsp; Saturday</div>
+      <div class="event-time">After Asar</div>
+      <div class="event-venue">MM House<br>Veliyambra, Mattannur</div>
+    </div>
+
+    <div class="event-sep"></div>
+
+    <div class="event-block">
+      <div class="event-title">Reception</div>
+      <div class="event-date-num">7</div>
+      <div class="event-date-txt">June 2026 &nbsp;·&nbsp; Sunday</div>
+      <div class="event-venue">Madikeri</div>
+      <div class="event-note">Venue &amp; time will be<br>confirmed soon,<br>In Sha Allah</div>
     </div>
   </div>
 
-  <div class="divider"><span></span><i></i><span></span></div>
+  <div class="divider"><span></span><div class="divider-gem"></div><span></span></div>
 
   <!-- countdown -->
+  <div class="countdown-label">Counting down to the Nikkah</div>
   <div class="countdown">
     <div class="cd-unit">
       <div class="cd-box"><span class="cd-num" id="d">00</span></div>
@@ -425,7 +534,9 @@
     </div>
   </div>
 
-  <!-- map below countdown -->
+  <div style="margin-top: clamp(16px,2.5vh,24px);"></div>
+
+  <!-- map link -->
   <a class="map-link"
      href="https://maps.app.goo.gl/hWDFYjN9z7zz8h2C6"
      target="_blank" rel="noopener">
@@ -433,14 +544,15 @@
       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
       <circle cx="12" cy="9" r="2.5" fill="#B8860B" stroke="none"/>
     </svg>
-    Open in Google Maps
+    View Venue on Google Maps
   </a>
 
-  <div class="divider"><span></span><i></i><span></span></div>
+  <div class="divider"><span></span><div class="divider-gem"></div><span></span></div>
 
-  <!-- welcome -->
-  <div class="welcome">
-    <p>With joy and gratitude, we invite you to celebrate the beginning of our forever.<br/>Your presence is our greatest blessing.</p>
+  <!-- closing -->
+  <div class="closing">
+    <p>Your presence and heartfelt duas<br>will make our day even more special.</p>
+    <p class="closing-love">With Love &amp; Prayers &#10084;&#65039;</p>
   </div>
 
 </div>
@@ -448,7 +560,7 @@
 <script>
   const target = new Date('2026-06-06T16:00:00');
 
-  function pad(n) { return String(n).padStart(2,'0'); }
+  function pad(n) { return String(n).padStart(2, '0'); }
 
   function flip(el, val) {
     if (el.textContent === val) return;
