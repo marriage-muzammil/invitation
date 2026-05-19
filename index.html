@@ -320,6 +320,72 @@
     }
     @keyframes blink { 0%,100%{opacity:.5} 50%{opacity:.12} }
 
+    /* ── petals ── */
+    .petal-canvas {
+      position: fixed; inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      overflow: hidden;
+    }
+    .petal {
+      position: absolute;
+      top: -60px;
+      opacity: 0;
+      animation: petalFall linear infinite;
+    }
+    @keyframes petalFall {
+      0%   { transform: translateY(0) rotate(0deg) scale(1);   opacity: 0; }
+      8%   { opacity: 0.7; }
+      90%  { opacity: 0.4; }
+      100% { transform: translateY(110vh) rotate(540deg) scale(0.6); opacity: 0; }
+    }
+
+    /* ── congratulation overlay ── */
+    .congrats-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 10;
+      background: #F3E8D4;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      text-align: center;
+      padding: 40px 32px;
+      opacity: 0;
+      transition: opacity 1.4s ease;
+    }
+    .congrats-overlay.visible { opacity: 1; }
+
+    .congrats-arabic {
+      font-family: 'Amiri', serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: #8B6914;
+      direction: rtl;
+      line-height: 2;
+      max-width: 560px;
+    }
+    .congrats-ref {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.52rem, 1vw, 0.68rem);
+      letter-spacing: 0.3em;
+      color: #B8860B;
+      text-transform: uppercase;
+    }
+    .congrats-english {
+      font-style: italic;
+      font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+      color: #6B4E15;
+      line-height: 1.8;
+      max-width: 480px;
+    }
+    .congrats-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      color: #B8860B;
+      line-height: 1.15;
+    }
+
     /* google maps link */
     .map-link {
       display: inline-flex;
@@ -452,17 +518,16 @@
   <div style="margin: clamp(12px,2vh,20px) 0;"></div>
 
   <!-- opening message -->
-  <div class="opening">
-    <p>With the mercy and blessings of Allah سبحانه وتعالى,<br>together with the love and prayers of our families,<br>we joyfully invite you to the Nikkah of</p>
-  </div>
+  <!-- <div class="opening">
+    <p>With the mercy and blessings of All, together with the love and prayers of our families,<br>we joyfully invite you to the Nikkah of</p>
+  </div> -->
 
-  <div style="margin: clamp(20px,3.5vh,36px) 0;"></div>
+  <!-- <div style="margin: clamp(20px,3.5vh,36px) 0;"></div> -->
 
   <!-- names -->
   <div class="names-row">
     <div class="person">
-      <div class="person-name">Muzammil</div>
-      <div class="person-full">Muzammil Musthafa</div>
+      <div class="person-name">Muzammil Musthafa</div>
       <div class="person-lineage">
         <span class="relation">Son of</span>
         <strong>Musthafa</strong> &amp; <strong>Umaiba</strong>
@@ -472,8 +537,7 @@
     <div class="amp-col">&amp;</div>
 
     <div class="person">
-      <div class="person-name">Maryam<br>Ramsheena</div>
-      <div class="person-full">Maryam Ramsheena Hussain</div>
+      <div class="person-name">Maryam Ramsheena</div>
       <div class="person-lineage">
         <span class="relation">Daughter of</span>
         <strong>Zakir Hussain</strong> &amp; <strong>Jameela Hussain</strong>
@@ -504,35 +568,38 @@
       <div class="event-date-num">7</div>
       <div class="event-date-txt">June 2026 &nbsp;·&nbsp; Sunday</div>
       <div class="event-venue">Madikeri</div>
-      <div class="event-note">Venue &amp; time will be<br>confirmed soon,<br>In Sha Allah</div>
+      <div class="event-note">Venue &amp; time will be confirmed soon, In Sha Allah</div>
     </div>
   </div>
 
   <div class="divider"><span></span><div class="divider-gem"></div><span></span></div>
 
   <!-- countdown -->
-  <div class="countdown-label">Counting down to the Nikkah</div>
-  <div class="countdown">
-    <div class="cd-unit">
-      <div class="cd-box"><span class="cd-num" id="d">00</span></div>
-      <span class="cd-lbl">Days</span>
-    </div>
-    <span class="cd-sep">:</span>
-    <div class="cd-unit">
-      <div class="cd-box"><span class="cd-num" id="h">00</span></div>
-      <span class="cd-lbl">Hours</span>
-    </div>
-    <span class="cd-sep">:</span>
-    <div class="cd-unit">
-      <div class="cd-box"><span class="cd-num" id="m">00</span></div>
-      <span class="cd-lbl">Mins</span>
-    </div>
-    <span class="cd-sep">:</span>
-    <div class="cd-unit">
-      <div class="cd-box"><span class="cd-num" id="s">00</span></div>
-      <span class="cd-lbl">Secs</span>
+  <div id="countdown-wrap">
+    <div class="countdown-label">Counting down to the Nikkah</div>
+    <div class="countdown">
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-num" id="d">00</span></div>
+        <span class="cd-lbl">Days</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-num" id="h">00</span></div>
+        <span class="cd-lbl">Hours</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-num" id="m">00</span></div>
+        <span class="cd-lbl">Mins</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit">
+        <div class="cd-box"><span class="cd-num" id="s">00</span></div>
+        <span class="cd-lbl">Secs</span>
+      </div>
     </div>
   </div>
+
 
   <div style="margin-top: clamp(16px,2.5vh,24px);"></div>
 
@@ -552,13 +619,27 @@
   <!-- closing -->
   <div class="closing">
     <p>Your presence and heartfelt duas<br>will make our day even more special.</p>
-    <p class="closing-love">With Love &amp; Prayers &#10084;&#65039;</p>
+
   </div>
 
 </div>
 
+<!-- congratulations overlay (shown when timer hits zero) -->
+<div class="congrats-overlay" id="congrats">
+  <div class="congrats-arabic">ادْخُلُوا الْجَنَّةَ أَنتُمْ وَأَزْوَاجُكُمْ تُحْبَرُونَ</div>
+  <div class="congrats-ref">— Qur'an 43:70</div>
+  <div class="congrats-english">"Enter Paradise, you and your spouses, in happiness."</div>
+  <div class="congrats-main">Mabrook<br>Muzammil &amp; Maryam</div>
+</div>
+
+<!-- petal canvas (fixed overlay, outside card) -->
+<div class="petal-canvas" id="petalCanvas"></div>
+
 <script>
-  const target = new Date('2026-06-06T16:00:00');
+  // ── countdown ──
+//   const target = new Date('2026-05-19T16:00:00');
+    const target = new Date('2026-06-06T23:59:59');
+  let finished = false;
 
   function pad(n) { return String(n).padStart(2, '0'); }
 
@@ -573,10 +654,19 @@
     }, 130);
   }
 
+  function showCongrats() {
+    document.querySelector('.card').style.display = 'none';
+    const c = document.getElementById('congrats');
+    c.style.display = 'flex';
+    setTimeout(() => { c.classList.add('visible'); }, 50);
+  }
+
   function tick() {
+    if (finished) return;
     const diff = target - new Date();
     if (diff <= 0) {
-      ['d','h','m','s'].forEach(id => document.getElementById(id).textContent = '00');
+      finished = true;
+      showCongrats();
       return;
     }
     flip(document.getElementById('d'), pad(Math.floor(diff / 86400000)));
@@ -587,6 +677,41 @@
 
   tick();
   setInterval(tick, 1000);
+
+  // ── petals ──
+  const PETAL_COUNT = 6;
+  const canvas = document.getElementById('petalCanvas');
+
+  // SVG star shapes (three variations: 4-point, 5-point, 6-point)
+  const shapes = [
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10Z" fill="currentColor" opacity="0.85"/></svg>`,
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1 L14.9 8.6 L23 9.8 L17 15.6 L18.5 23.5 L12 19.9 L5.5 23.5 L7 15.6 L1 9.8 L9.1 8.6Z" fill="currentColor" opacity="0.82"/></svg>`,
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0 L13.5 9 L22 6 L15 13 L22 18 L13.5 15 L12 24 L10.5 15 L2 18 L9 13 L2 6 L10.5 9Z" fill="currentColor" opacity="0.8"/></svg>`
+  ];
+  const colors = ['#C9950E', '#D4A017', '#B8860B', '#E2B84A', '#F0D080'];
+
+  for (let i = 0; i < PETAL_COUNT; i++) {
+    const petal = document.createElement('div');
+    petal.className = 'petal';
+
+    const size  = 10 + Math.random() * 14;        // 10–24 px
+    const left  = Math.random() * 100;             // 0–100 vw
+    const delay = Math.random() * 18;              // stagger starts
+    const dur   = 10 + Math.random() * 10;         // 10–20 s per cycle
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const shape = shapes[Math.floor(Math.random() * shapes.length)];
+
+    petal.style.cssText = `
+      left: ${left}vw;
+      width: ${size}px;
+      height: ${size * 1.4}px;
+      color: ${color};
+      animation-duration: ${dur}s;
+      animation-delay: ${delay}s;
+    `;
+    petal.innerHTML = shape;
+    canvas.appendChild(petal);
+  }
 </script>
 </body>
 </html>
