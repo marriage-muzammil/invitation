@@ -412,6 +412,42 @@
       flex-shrink: 0;
     }
 
+    /* ── couple photo ── */
+    .couple-photo-wrap {
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+    .couple-photo-frame {
+      position: relative;
+      display: inline-block;
+      padding: 10px;
+      background: #EDE0C8;
+      border: 1px solid #D9C49A;
+      box-shadow:
+        0 0 0 1px rgba(185,120,10,0.15),
+        0 8px 40px rgba(180,120,10,0.14),
+        inset 0 0 0 1px rgba(185,120,10,0.08);
+    }
+    .couple-photo-frame::before,
+    .couple-photo-frame::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border: 1px solid rgba(185,120,10,0.22);
+      pointer-events: none;
+    }
+    .couple-photo-frame::after {
+      inset: 7px;
+      border-color: rgba(185,120,10,0.12);
+    }
+    .couple-photo-frame img {
+      display: block;
+      width: 100%;
+      max-width: 380px;
+      height: auto;
+    }
+
     /* ── closing ── */
     .closing {
       text-align: center;
@@ -546,6 +582,15 @@
         <br>
         <strong>Eramu</strong> &amp; <strong>Zainaba</strong>
       </div>
+    </div>
+  </div>
+
+  <div class="divider"><span></span><div class="divider-gem"></div><span></span></div>
+
+  <!-- couple photo -->
+  <div class="couple-photo-wrap">
+    <div class="couple-photo-frame">
+      <img src="wedding.jpeg" alt="Muzammil &amp; Maryam" />
     </div>
   </div>
 
